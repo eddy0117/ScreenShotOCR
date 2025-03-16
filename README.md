@@ -1,5 +1,5 @@
 # ScreenshotOCR
-![alt text](OCRapp/src/icon.ico)
+![alt text](OCRapp/src/icon.ico)<br>
 ScreenshotOCR is a Python project that extracts text from images captured from the clipboard and processes them using ChatGPT API. It supports both regular and translated text extraction.
 
 **Openai API key is required**

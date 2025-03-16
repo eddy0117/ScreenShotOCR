@@ -8,8 +8,8 @@ def load_config():
         with open("config.yaml", "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
     except Exception as e:
-        return {"api_key": "", "start_up": False, "auto_translate": False, "hotkey": "ctrl+alt+x"}
-
+        return None
+    
 def save_config(config):
     with open("config.yaml", "w", encoding="utf-8") as f:
         yaml.dump(config, f, allow_unicode=True)

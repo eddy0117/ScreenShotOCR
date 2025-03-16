@@ -10,6 +10,16 @@ from OCRapp.core.ocr_process import process_clipboard_image
 from OCRapp.utils.utils import apply_config_to_prompt
 
 
+class CustomComboBox(QComboBox):
+    def __init__(self, items=None, parent=None):
+        super().__init__(parent)
+        if items:
+            for item in items:
+                if isinstance(item, tuple):
+                    self.addItem(item[0], userData=item[1])
+                else:
+                    self.addItem(item)
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -33,12 +43,14 @@ class MainWindow(QMainWindow):
         hlayout_api.addWidget(self.api_entry)
         layout.addLayout(hlayout_api)
 
-        # Model list
+        # Model list using CustomComboBox
         model_layout = QHBoxLayout()
         self.model_label = QLabel("model:")
-        self.model_combo = QComboBox()
-        self.model_combo.addItem("gpt-4o")
-        self.model_combo.addItem("gpt-4o-mini")
+        self.model_combo = CustomComboBox(
+            [
+                "gpt-4o", 
+                "gpt-4o-mini"
+             ])
 
         current_model = self.config["model"]
         idx = self.model_combo.findText(current_model)
@@ -56,9 +68,11 @@ class MainWindow(QMainWindow):
 
         lang_layout = QHBoxLayout()
         self.language_label = QLabel("Language:")
-        self.language_combo = QComboBox()
-        self.language_combo.addItem("Chinese (Traditional)", "zh-tw")
-        self.language_combo.addItem("English", "en")
+        self.language_combo = CustomComboBox(
+            [
+                ("Chinese (Traditional)", "zh-tw"),
+                ("English", "en")
+            ])
 
         current_lang = self.config.get("translate_language", "en")
         idx = self.language_combo.findData(current_lang)
@@ -67,6 +81,7 @@ class MainWindow(QMainWindow):
         lang_layout.addWidget(self.language_label)
         lang_layout.addWidget(self.language_combo)
         layout.addLayout(lang_layout)
+
         # Hide combobox when auto translate is not checked
         self.language_label.setVisible(self.auto_translate_cb.isChecked())
         self.language_combo.setVisible(self.auto_translate_cb.isChecked())
@@ -88,7 +103,7 @@ class MainWindow(QMainWindow):
         self.language_combo.setVisible(checked)
     
     def save_settings(self):
-        # 檢查 API Key 是否為空
+        # check if api key is empty
         if not self.api_entry.text().strip():
             QMessageBox.warning(self, "Warning", "API Key must be filled in!")
             return

@@ -21,10 +21,11 @@ ScreenshotOCR is a Python project that extracts text from images captured from t
    ```
    pip install -r requirements.txt
    ```
-2. Configure your API key and other settings using the UI.
-3. Use Windows snipping tool (win+shift+s) to clip an image.
-4. Use the defined hotkey (ctrl+alt+x) to trigger OCR process
-5. The extracted (and optionally translated) text will be copied to the clipboard.
+2. Run ```python main.py```
+3. Configure your API key and other settings using the UI.
+4. Use Windows snipping tool (win+shift+s) to clip an image.
+5. Use the defined hotkey (ctrl+alt+x) to trigger OCR process
+6. The extracted (and optionally translated) text will be copied to the clipboard.
 
 ## Customization
 

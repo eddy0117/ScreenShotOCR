@@ -11,13 +11,19 @@ ScreenshotOCR is a Python project that extracts text from images captured from t
 
 ## Setup and Usage
 
-1. Install required dependencies:
+1. Create conda environment and install required dependencies:
+   ```
+   conda create -n sOCR python==3.9
+   ```
+   ```
+   conda activate sOCR
+   ```
    ```
    pip install -r requirements.txt
    ```
 2. Configure your API key and other settings using the UI.
-3. Copy an image to the clipboard.
-4. Use the defined hotkey to trigger OCR process
+3. Use Windows snipping tool (win+shift+s) to clip an image.
+4. Use the defined hotkey (ctrl+alt+x) to trigger OCR process
 5. The extracted (and optionally translated) text will be copied to the clipboard.
 
 ## Customization

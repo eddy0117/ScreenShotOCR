@@ -9,18 +9,6 @@ ScreenshotOCR is a Python project that extracts text from images captured from t
 - Capture images directly from the clipboard.
 - Auto-translate functionality using prompts defined in `prompt.json`.
 
-
-## File Structure
-```
-ScreenshotOCR/
-├── config.yaml (optional)
-├── image_processing.py
-├── prompt.json
-├── README.md
-├── ui.py
-└── utils.py
-```
-
 ## Setup and Usage
 
 1. Install required dependencies:

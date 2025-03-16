@@ -5,9 +5,9 @@ import openai
 from PyQt5.QtWidgets import QMainWindow, QWidget, QLineEdit, QLabel, QCheckBox, QPushButton, QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QMessageBox
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QIcon 
-from utils.config import load_config, save_config
-from core.ocr_process import process_clipboard_image
-from utils.utils import apply_config_to_prompt
+from OCRapp.utils.config import load_config, save_config
+from OCRapp.core.ocr_process import process_clipboard_image
+from OCRapp.utils.utils import apply_config_to_prompt
 
 
 class MainWindow(QMainWindow):
@@ -106,9 +106,10 @@ class MainWindow(QMainWindow):
         self.apply_settings()
     
     def apply_settings(self):
+        last_hotkey = self.config.get("hotkey")
         self.config = load_config()
         system_prompt = apply_config_to_prompt(self.config)
-        keyboard.remove_hotkey(self.config.get("hotkey"))
+        keyboard.remove_hotkey(last_hotkey)
         keyboard.add_hotkey(self.config.get("hotkey"), process_clipboard_image, args=(self.config, system_prompt ))
 
     def closeEvent(self, event):

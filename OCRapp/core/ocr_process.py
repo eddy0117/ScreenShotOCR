@@ -4,7 +4,7 @@ import winsound
 import pyperclip
 from PIL import ImageGrab
 import logging
-from api.openai_api import call_openai_api
+from OCRapp.api import call_openai_api
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 

@@ -4,7 +4,7 @@ from PyQt5.QtGui import QIcon
 
 
 def create_tray(app, window: QMainWindow):
-    icon_path = os.path.join("src", "icon.ico")
+    icon_path = os.path.join("OCRapp", "src", "icon.ico")
     tray = QSystemTrayIcon(QIcon(icon_path), app)
 
     menu = QMenu(window)

@@ -13,7 +13,7 @@ from OCRapp.utils.utils import apply_config_to_prompt
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setWindowIcon(QIcon(os.path.join("src", "icon.ico")))
+        self.setWindowIcon(QIcon(os.path.join("OCRapp", "src", "icon.ico")))
         self.setWindowTitle("ScreenshotOCR settings")
         self.setMinimumSize(400, 250)
         self.config = load_config()

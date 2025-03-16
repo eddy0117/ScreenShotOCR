@@ -2,7 +2,7 @@ import logging
 import os
 import keyboard
 import openai
-from PyQt5.QtWidgets import QMainWindow, QWidget, QLineEdit, QLabel, QCheckBox, QPushButton, QVBoxLayout, QHBoxLayout, QApplication, QComboBox
+from PyQt5.QtWidgets import QMainWindow, QWidget, QLineEdit, QLabel, QCheckBox, QPushButton, QVBoxLayout, QHBoxLayout, QApplication, QComboBox, QMessageBox
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QIcon 
 from utils.config import load_config, save_config
@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
         self.api_entry = QLineEdit()
         self.api_entry.setEchoMode(QLineEdit.Password)
         self.api_entry.setText(self.config.get("api_key", ""))
+        
         hlayout_api.addWidget(self.api_entry)
         layout.addLayout(hlayout_api)
 
@@ -87,6 +88,10 @@ class MainWindow(QMainWindow):
         self.language_combo.setVisible(checked)
     
     def save_settings(self):
+        # 檢查 API Key 是否為空
+        if not self.api_entry.text().strip():
+            QMessageBox.warning(self, "Warning", "API Key must be filled in!")
+            return
         new_config = {
             "api_key": self.api_entry.text(),
             "model": self.model_combo.currentText(),
@@ -103,7 +108,6 @@ class MainWindow(QMainWindow):
     def apply_settings(self):
         self.config = load_config()
         system_prompt = apply_config_to_prompt(self.config)
-        logging.info(f"prompt: {system_prompt}")
         keyboard.remove_hotkey(self.config.get("hotkey"))
         keyboard.add_hotkey(self.config.get("hotkey"), process_clipboard_image, args=(self.config, system_prompt ))
 

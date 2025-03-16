@@ -1,11 +1,13 @@
 import yaml
+import os
 
 def load_config():
     try:
+        if not os.path.exists("config.yaml"):
+            create_default_config()
         with open("config.yaml", "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
     except Exception as e:
-        create_default_config()
         return {"api_key": "", "start_up": False, "auto_translate": False, "hotkey": "ctrl+alt+x"}
 
 def save_config(config):
@@ -18,5 +20,6 @@ def create_default_config():
         "model": "gpt-4o",
         "start_up": False,
         "auto_translate": False, 
+        "translate_language": "zh-tw",
         "hotkey": "ctrl+alt+x"
         })
